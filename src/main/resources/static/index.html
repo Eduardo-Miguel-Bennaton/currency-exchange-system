@@ -4,13 +4,20 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Currency Exchange</title>
-    <style src="./style.css"></style>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   </head>
   <body>
     <div class="container">
       <h1>Currency Exchange</h1>
-
+      <p>This currency system is a mock project designed to demonstrate and test API integrations for real-time exchange rate retrieval.</p>
       <form id="exchangeForm">
+        <div>
+          <label for="amount">Amount:</label>
+          <input type="number" id="amount" value="100" required step="0.01" />
+        </div>
         <div>
           <label for="fromCurrency">From Currency (e.g., USD):</label>
           <input type="text" id="fromCurrency" value="USD" required />
@@ -19,13 +26,8 @@
           <label for="toCurrency">To Currency (e.g., EUR):</label>
           <input type="text" id="toCurrency" value="EUR" required />
         </div>
-        <div>
-          <label for="amount">Amount:</label>
-          <input type="number" id="amount" value="100" required step="0.01" />
-        </div>
         <button type="submit">Convert</button>
       </form>
-
       <div id="results">
         <p>Results will appear here.</p>
       </div>
