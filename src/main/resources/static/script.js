@@ -1,41 +1,35 @@
 document
   .getElementById("exchangeForm")
   .addEventListener("submit", async function (event) {
-    event.preventDefault(); // Prevent default form submission
+    event.preventDefault();
 
     const from = document.getElementById("fromCurrency").value.toUpperCase();
     const to = document.getElementById("toCurrency").value.toUpperCase();
     const amount = parseFloat(document.getElementById("amount").value);
     const resultsDiv = document.getElementById("results");
-    const convertButton = document.querySelector('button[type="submit"]'); // Get the button element
+    const convertButton = document.querySelector('button[type="submit"]');
 
-    // --- NEW: Debouncing/Throttling mechanism ---
-    // Disable the button immediately to prevent further clicks
     convertButton.disabled = true;
-    resultsDiv.innerHTML = "<p>Loading...</p>"; // Show loading message right away
+    resultsDiv.innerHTML = "<p>Loading...</p>";
 
-    // Re-enable the button after a delay (e.g., 2 seconds)
-    // This gives the API call time to process and prevents rapid re-submission
     setTimeout(() => {
       convertButton.disabled = false;
-    }, 2000); // Re-enable after 2000 milliseconds (2 seconds)
-    // --- END NEW ---
+    }, 2000);
 
     if (isNaN(amount) || amount <= 0) {
       resultsDiv.innerHTML =
         '<p class="error">Please enter a valid amount.</p>';
-      convertButton.disabled = false; // Re-enable if validation fails instantly
+      convertButton.disabled = false;
       return;
     }
 
     try {
-      // Your Spring Boot API endpoint
       const apiUrl = `/api/exchange?from=${from}&to=${to}&amount=${amount}`;
 
       const response = await fetch(apiUrl);
 
       if (!response.ok) {
-        const errorText = await response.text(); // Get raw error message from backend
+        const errorText = await response.text();
         throw new Error(
           `API error: ${response.status} ${response.statusText} - ${errorText}`,
         );
@@ -54,7 +48,6 @@ document
     } catch (error) {
       console.error("Fetch error:", error);
       resultsDiv.innerHTML = `<p class="error">Error: ${error.message}</p>`;
-      // In case of an API error, ensure the button is re-enabled so user can retry
       convertButton.disabled = false;
     }
   });
