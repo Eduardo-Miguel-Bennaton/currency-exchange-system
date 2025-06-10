@@ -15,7 +15,7 @@ This project is a mock currency exchange system designed to demonstrate and test
 
 ### Frontend
 - **HTML5**: Structure of the web application.
-- **CSS3**: Styling, including advanced features like `linear-gradient`, `radial-gradient`, `filter: blur()`, and `@keyframes` for animations.
+- **CSS3**: Styling and animations.
 - **JavaScript (ES6+)**: Handles form submission, API requests using the Fetch API, DOM manipulation, and button debouncing logic.
 
 ### Backend
