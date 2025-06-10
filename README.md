@@ -33,3 +33,52 @@ To get this project up and running on your local machine, follow these steps:
 - **Java Development Kit (JDK)**: Version 24 or compatible.
 - **Maven or Gradle**: Installed on your system.
 - **A modern web browser**: (e.g., Chrome, Firefox, Edge).
+
+### Backend Setup
+
+1. **Clone the repository**:
+
+    ```bash
+    git clone [Your Repository URL Here]
+    cd currency-exchange-system
+    ```
+
+2. **Configure the API Access Key**:
+
+    Open the file at:
+
+    ```
+    src/main/resources/application.properties
+    ```
+
+    Replace the following line:
+
+    ```
+    exchange.api.access-key=YOUR_ACCESS_KEY
+    ```
+
+    with your actual access key from [Fixer.io](https://fixer.io), like so:
+
+    ```
+    exchange.api.access-key=your_actual_access_key_here
+    ```
+
+    > **Note**: This project is integrated with **[Fixer.io](https://fixer.io)** (`http://data.fixer.io/api/`), a reliable foreign exchange rates API. Make sure your access key supports the endpoints used.
+
+3. **Build and run the backend**:
+
+    **Using Maven:**
+    ```bash
+    ./mvnw spring-boot:run
+    ```
+
+    **Using Gradle:**
+    ```bash
+    ./gradlew bootRun
+    ```
+
+    The backend will start at:
+
+    ```
+    http://localhost:8080
+    ```
