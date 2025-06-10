@@ -36,10 +36,12 @@ To get this project up and running on your local machine, follow these steps:
 
 ### Backend Setup
 
+### Backend Setup
+
 1. **Clone the repository**:
 
     ```bash
-    git clone https://github.com/Eduardo-Miguel-Bennaton/currency-exchange-system.git
+    git clone [Your Repository URL Here]
     cd currency-exchange-system
     ```
 
@@ -65,7 +67,19 @@ To get this project up and running on your local machine, follow these steps:
 
     > **Note**: This project is integrated with **[Fixer.io](https://fixer.io)** (`http://data.fixer.io/api/`), a reliable foreign exchange rates API. Make sure your access key supports the endpoints used.
 
-3. **Build and run the backend**:
+3. **Package Structure Info**:
+
+    The Java source files are currently located in:
+
+    ```
+    src/main/java/com/eduardo/currencyexchange/
+    ```
+
+    This follows a standard reverse-domain package naming convention.  
+    You can **change this package structure** to reflect your own namespace or organization (e.g., `com/yourcompany/yourapp`).  
+    Just be sure to update the package declarations at the top of your Java files accordingly.
+
+4. **Build and run the backend**:
 
     **Using Maven:**
     ```bash
@@ -82,6 +96,9 @@ To get this project up and running on your local machine, follow these steps:
     ```
     http://localhost:8080
     ```
+
+
+
 
 <img width="500" alt="image" src="https://github.com/user-attachments/assets/8de7c17a-bbcf-41ca-afbd-95a3fca781db" />
 
