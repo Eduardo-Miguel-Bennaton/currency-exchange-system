@@ -30,9 +30,7 @@ document
 
       if (!response.ok) {
         const errorText = await response.text();
-        throw new Error(
-          `API error: ${response.status} ${response.statusText} - ${errorText}`,
-        );
+        throw new Error(`API_ERROR_STATUS:${response.status} - ${errorText}`);
       }
 
       const data = await response.json();
@@ -47,7 +45,49 @@ document
                     `;
     } catch (error) {
       console.error("Fetch error:", error);
-      resultsDiv.innerHTML = `<p class="error">Error: ${error.message}</p>`;
+
+      let userFriendlyMessage =
+        "An unexpected error occurred. Please try again.";
+
+      if (error.message.startsWith("API_ERROR_STATUS:")) {
+        const parts = error.message.split(" - ");
+        const statusCodeStr = parts[0].replace("API_ERROR_STATUS:", "");
+        const statusCode = parseInt(statusCodeStr);
+        const backendMessage = parts.slice(1).join(" - ");
+
+        switch (statusCode) {
+          case 400:
+            userFriendlyMessage =
+              "The currency codes or amount you entered are invalid. Please check your input.";
+            break;
+          case 502:
+            if (backendMessage.includes("missing expected exchange rates")) {
+              userFriendlyMessage =
+                "We couldn't find exchange rates for the currencies you entered. Please ensure they are valid (e.g., USD, EUR).";
+            } else {
+              userFriendlyMessage =
+                "There was an issue processing the currency exchange due to unexpected data. Please try again.";
+            }
+            break;
+          case 503:
+            userFriendlyMessage =
+              "Our currency exchange service is temporarily unavailable. Please try again in a moment.";
+            break;
+          case 500:
+            userFriendlyMessage =
+              "Something went wrong on our side. Please try again later.";
+            break;
+          default:
+            userFriendlyMessage =
+              "An error occurred with the currency exchange service. Please try again.";
+            break;
+        }
+      } else if (error.message.includes("Failed to fetch")) {
+        userFriendlyMessage =
+          "Could not connect to the currency exchange service. Please check your internet connection or ensure the server is running.";
+      }
+
+      resultsDiv.innerHTML = `<p class="error">${userFriendlyMessage}</p>`;
       convertButton.disabled = false;
     }
   });

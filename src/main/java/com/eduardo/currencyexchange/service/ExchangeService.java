@@ -1,6 +1,8 @@
 package com.eduardo.currencyexchange.service;
 
 import com.eduardo.currencyexchange.dto.ExchangeResponse;
+import com.eduardo.currencyexchange.exception.ExternalApiException;
+import com.eduardo.currencyexchange.exception.InvalidApiResponseException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
@@ -35,15 +37,15 @@ public class ExchangeService {
             response = restTemplate.getForEntity(url, String.class);
         } catch (HttpClientErrorException e) {
             logger.error("API call failed with status code {}: {}", e.getStatusCode(), e.getResponseBodyAsString());
-            throw new RuntimeException("Error calling exchange rate API: " + e.getResponseBodyAsString(), e);
+            throw new ExternalApiException("Error calling exchange rate API: " + e.getResponseBodyAsString(), e);
         } catch (Exception e) {
             logger.error("An unexpected error occurred during API call: {}", e.getMessage(), e);
-            throw new RuntimeException("An unexpected error occurred when trying to get exchange rate.", e);
+            throw new ExternalApiException("An unexpected error occurred when trying to get exchange rate.", e);
         }
 
         if (response == null || response.getBody() == null || response.getBody().isEmpty()) {
             logger.error("API call returned null or empty response body for URL: {}", url);
-            throw new RuntimeException("API returned no data or an empty response body. Check API key/URL/parameters.");
+            throw new InvalidApiResponseException("API returned no data or an empty response body. Check API key/URL/parameters.");
         }
 
         String responseBody = response.getBody();
@@ -54,7 +56,7 @@ public class ExchangeService {
             json = new JSONObject(responseBody);
         } catch (Exception e) {
             logger.error("Failed to parse JSON response: {}", responseBody, e);
-            throw new RuntimeException("Could not parse JSON response from API.", e);
+            throw new InvalidApiResponseException("Could not parse JSON response from API.", e);
         }
 
         if (!json.has("success") || !json.getBoolean("success")) {
@@ -63,13 +65,13 @@ public class ExchangeService {
                 errorMessage = json.getJSONObject("error").toString();
             }
             logger.error("API response indicates failure: {}", errorMessage);
-            throw new RuntimeException("Invalid response from exchange rate API: " + errorMessage);
+            throw new ExternalApiException("Invalid response from exchange rate API: " + errorMessage);
         }
 
         JSONObject rates = json.getJSONObject("rates");
         if (!rates.has(from) || !rates.has(to)) {
             logger.error("API response missing expected rates for '{}' or '{}'. Response: {}", from, to, responseBody);
-            throw new RuntimeException("API response missing expected exchange rates for " + from + " or " + to);
+            throw new InvalidApiResponseException("API response missing expected exchange rates for " + from + " or " + to);
         }
 
         double rateFromEurToBase = rates.getDouble(from);
