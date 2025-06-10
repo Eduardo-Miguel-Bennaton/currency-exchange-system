@@ -39,7 +39,7 @@ To get this project up and running on your local machine, follow these steps:
 1. **Clone the repository**:
 
     ```bash
-    git clone [Your Repository URL Here]
+    git clone https://github.com/Eduardo-Miguel-Bennaton/currency-exchange-system.git
     cd currency-exchange-system
     ```
 
