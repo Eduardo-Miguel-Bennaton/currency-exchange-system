@@ -82,3 +82,6 @@ To get this project up and running on your local machine, follow these steps:
     ```
     http://localhost:8080
     ```
+
+<img width="500" alt="image" src="https://github.com/user-attachments/assets/8de7c17a-bbcf-41ca-afbd-95a3fca781db" />
+
