@@ -14,11 +14,13 @@ This project is a mock currency exchange system designed to demonstrate and test
 ## Technologies Used
 
 ### Frontend
+
 - **HTML5**: Structure of the web application.
 - **CSS3**: Styling and animations.
 - **JavaScript (ES6+)**: Handles form submission, API requests using the Fetch API, DOM manipulation, and button debouncing logic.
 
 ### Backend
+
 - **Java**: The core programming language for the backend.
 - **Spring Boot**: Framework for building the RESTful API, providing a rapid development environment.
 - **RESTful API**: Exposes an `/api/exchange` endpoint to handle currency conversion requests with `from`, `to`, and `amount` parameters.
@@ -38,50 +40,51 @@ To get this project up and running on your local machine, follow these steps:
 
 1. **Clone the repository**:
 
-    ```bash
-    git clone https://github.com/Eduardo-Miguel-Bennaton/currency-exchange-system.git
-    cd currency-exchange-system
-    ```
+   ```bash
+   git clone https://github.com/Eduardo-Miguel-Bennaton/currency-exchange-system.git
+   cd currency-exchange-system
+   ```
 
 2. **Configure the API Access Key**:
 
-    Open the file at:
+   Open the file at:
 
-    ```
-    src/main/resources/application.properties
-    ```
+   ```
+   src/main/resources/application.properties
+   ```
 
-    Replace the following line:
+   Replace the following line:
 
-    ```
-    exchange.api.access-key=YOUR_ACCESS_KEY
-    ```
+   ```
+   exchange.api.access-key=YOUR_ACCESS_KEY
+   ```
 
-    with your actual access key from [Fixer.io](https://fixer.io), like so:
+   with your actual access key from [Fixer.io](https://fixer.io), like so:
 
-    ```
-    exchange.api.access-key=your_actual_access_key_here
-    ```
+   ```
+   exchange.api.access-key=your_actual_access_key_here
+   ```
 
-    > **Note**: This project is integrated with **[Fixer.io](https://fixer.io)** (`http://data.fixer.io/api/`), a reliable foreign exchange rates API. Make sure your access key supports the endpoints used.
+   > **Note**: This project is integrated with **[Fixer.io](https://fixer.io)** (`http://data.fixer.io/api/`), a reliable foreign exchange rates API. Make sure your access key supports the endpoints used.
 
 3. **Build and run the backend**:
 
-    **Using Maven:**
-    ```bash
-    ./mvnw spring-boot:run
-    ```
+   **Using Maven:**
 
-    **Using Gradle:**
-    ```bash
-    ./gradlew bootRun
-    ```
+   ```bash
+   ./mvnw spring-boot:run
+   ```
 
-    The backend will start at:
+   **Using Gradle:**
 
-    ```
-    http://localhost:8080
-    ```
+   ```bash
+   ./gradlew bootRun
+   ```
+
+   The backend will start at:
+
+   ```
+   http://localhost:8080
+   ```
 
 <img width="500" alt="image" src="https://github.com/user-attachments/assets/8de7c17a-bbcf-41ca-afbd-95a3fca781db" />
-
